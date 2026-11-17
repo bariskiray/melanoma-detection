@@ -1,0 +1,35 @@
+# Main experiment: EfficientNet-B0, full fine-tuning, lesion-level split, degradation augmentation.
+experiment: effnet_b0_lesion_robust
+
+data:
+  metadata: data/ham10000/HAM10000_metadata.csv
+  image_dir: data/ham10000/images
+  split_file: splits/ham10000_lesion_split.csv
+  split_mode: lesion          # lesion | image (image = leaky, only for the ablation)
+  external_labels: data/isic2018_test/ISIC2018_Task3_Test_GroundTruth.csv
+  external_image_dir: data/isic2018_test/images
+  img_size: 224
+  degradation_aug: true      # random downscale + JPEG re-encoding (robustness)
+
+model:
+  name: efficientnet_b0
+  pretrained: true
+  drop_rate: 0.3
+  freeze_backbone: false
+
+train:
+  epochs: 20
+  batch_size: 32
+  lr: 2.0e-4
+  weight_decay: 1.0e-4
+  warmup_epochs: 1
+  pos_weight: 1.0             # >1 up-weights melanoma; 1.0 keeps probabilities calibrated
+  early_stopping_patience: 5
+  num_workers: 4
+  seed: 42
+
+eval:
+  threshold_strategy: sensitivity   # sensitivity | youden
+  target_sensitivity: 0.85          # chosen on the validation set, never on test
+  tta: true
+  bootstrap: 1000
