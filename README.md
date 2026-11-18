@@ -1,6 +1,6 @@
 # Melanoma Detection from Dermoscopy
 
-[![CI](https://github.com/bariskiray/MedicalInformatics/actions/workflows/ci.yml/badge.svg)](https://github.com/bariskiray/MedicalInformatics/actions/workflows/ci.yml)
+[![CI](https://github.com/bariskiray/melanoma-detection/actions/workflows/ci.yml/badge.svg)](https://github.com/bariskiray/melanoma-detection/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-timm-ee4c2c)
 ![License](https://img.shields.io/badge/code-MIT-green)
@@ -129,7 +129,7 @@ Training takes about 20 minutes on an Apple M1 Pro (PyTorch MPS backend).
 
 ## From v1 to v2: what the audit found
 
-The original project (kept at tag [`v1.0`](https://github.com/bariskiray/MedicalInformatics/tree/v1.0))
+The original project (kept at tag [`v1.0`](https://github.com/bariskiray/melanoma-detection/tree/v1.0))
 reported 86.6% accuracy, 82.7% AUC and 77.8% melanoma recall. Re-checking it turned up four problems:
 
 1. **Mixed thresholds.** Accuracy, precision and recall came from `model.evaluate()` at threshold 0.5.
@@ -154,8 +154,8 @@ All reported runs use the fixed initialisation.
 ## Quick start
 
 ```bash
-git clone https://github.com/bariskiray/MedicalInformatics.git
-cd MedicalInformatics
+git clone https://github.com/bariskiray/melanoma-detection.git
+cd melanoma-detection
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[app,dev]"
 ```
@@ -167,7 +167,7 @@ pip install -e ".[app,dev]"
 
 ```bash
 mkdir -p models && curl -L -o models/melanoma_effnet_b0.pt \
-  https://github.com/bariskiray/MedicalInformatics/releases/download/v2.0.0/melanoma_effnet_b0.pt
+  https://github.com/bariskiray/melanoma-detection/releases/download/v2.0.0/melanoma_effnet_b0.pt
 streamlit run app/streamlit_app.py
 ```
 
